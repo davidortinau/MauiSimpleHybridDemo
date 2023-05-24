@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:hwv="clr-namespace:HybridWebView;assembly=HybridWebView"
+             x:Class="MauiSimpleHybridDemo.MainPage"
+             xmlns:app="clr-namespace:MauiSimpleHybridDemo"
+             x:DataType="app:MainPage">
+
+    <Grid Row="20" Margin="10" RowDefinitions="Auto,*">
+        <VerticalStackLayout>
+            <Entry x:Name="Msg" Placeholder="Send msg to JS" ReturnType="Send" 
+                   ReturnCommand="{Binding SendCommand}" />
+            <Button Text="Submit" Clicked="Button_Clicked" />
+        </VerticalStackLayout>
+        
+        <hwv:HybridWebView Grid.Row="1" 
+                           HybridAssetRoot="hybrid_root" 
+                           MainFile="index.html"
+                       RawMessageReceived="HybridWebView_RawMessageReceived"
+                       x:Name="myHybridView"
+                       HeightRequest="300"
+                       />
+
+        <Label x:Name="Bot" 
+               ZIndex="-1"
+               Grid.RowSpan="2" Opacity="0"
+               InputTransparent="True"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill"
+               FontAttributes="Bold"
+               Background="#f1f1f1"
+               FontFamily="B612"
+               TextColor="Purple">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+            </Label.GestureRecognizers>
+        </Label>
+    </Grid>
+
+</ContentPage>
